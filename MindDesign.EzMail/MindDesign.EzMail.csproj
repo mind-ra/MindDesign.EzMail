@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <Authors>Angelo Rotta</Authors>
+    <Company>Angelo Rotta</Company>
+    <Description>EzMail is a simple Razor Class Library designed to simplify the sending of email in .Net Core 3.0 apps.</Description>
+    <PackageTags>mail, simple, razor class library, razor, template, mailkit, smtp</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

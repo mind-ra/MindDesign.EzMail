@@ -1,6 +1,6 @@
 ﻿# MindDesign.EzMail
 
-**EzMail** is a simple Razor Class Library design to simplify the sending of email in .Net Core 3.0 apps.
+**EzMail** is a simple Razor Class Library designed to simplify the sending of email in .Net Core 3.0 apps.
 
 ---
 
