@@ -2,7 +2,25 @@
 
 **EzMail** is a simple Razor Class Library design to simplify the sending of email in .Net Core 3.0 apps.
 
-**EzMail** must be configured inside <code>appsettings.json</code> using the following structure.
+---
+
+### Installation
+
+**EzMail** is on [NuGet](https://www.nuget.org/packages/MindDesign.EzMail/)
+
+``` powershell
+Install-Package MindDesign.EzMail
+```
+
+Minimum Requirements: **.NET Core 3.0**.
+
+---
+
+### Initialization
+
+**EzMail** must be configured inside <code>appsettings.json</code> and initialized as a service inside <code>Startup.cs</code>.
+
+If <code>DebugData.Active</code> is <code>true</code> EzMail overwrite all receivers with <code>DebugData.Email</code>.
 
 ```json
 "Ezmail": {
@@ -20,18 +38,100 @@
   }
 ```
 
-## Razor Class Library
+```csharp
+public class Startup
+{
+    ...
+    public void ConfigureServices(IServiceCollection services)
+    {
+       ...
+        services.AddScoped<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+        services.AddScoped<IEzMailService, EzMailService>();
+        ...
+    }
+...
+}
+```
+
+---
+
+### Usage
+
+After initialization you can get the service in a Controller or in aRazor Pages with Dependecy injection.
+
+```csharp
+
+public class IndexModel : PageModel
+{
+    private readonly IEzMailService _mailService;
+    public IndexModel(IEzMailService mailService)
+    {
+        _mailService = mailService;
+    }
+    public async Task<IActionResult> OnGetAsync()
+    {
+        var model = new Dictionary<string, string>() {
+            { "Name" , "Angelo"},
+            { "Email" , "angelo@domain.it"}
+        };
+
+        var body = await _mailService.Renderer.RenderViewToStringAsync("/Views/EzMail/EzSimpleMessage.cshtml", model);
+
+        await _mailService.SendMailAsync(
+            subject: "subject",
+            body: body, 
+            fromAddress: "from@domain.it",
+            toAddresses: new string[] { "Angelo <to@domain.it>", "second@domain.it" },
+            replyAddresses: new string[] { "replyTo@domain.it" },
+            ccAddresses: new string[] { "cc@domain.it" },
+            bccAddresses: new string[] { "Bcc <bcc@domain.it>" });
+        
+        return Page();
+    }
+}
+```
+---
+
+## Integrated Views
 
 You can overwrite the integrated views, to personalize the layout of your email, or you can use them as provided.
 
-The views you can overwrite are:
+The views provided are:
 
-``` 
+```
+/Views/EzMail/EzSimpleMessage.cshtml
+
 /Views/EzMail/_EzMailLayout.cshtml
 /Views/EzMail/_EzMailHeader.cshtml
 /Views/EzMail/_EzMailFooter.cshtml
+```
 
-/Views/EzMail/EzSimpleMessage.cshtml
+#### EzSimpleMessage.cshtml
+
+```html
+@{
+    var odd = true;
+}
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+    <tr>
+        <td colspan="2" class="content-block" style="font-family: sans-serif; vertical-align: middle; padding: 5px; font-size: 24px; text-align:center">
+            Messaggio semplice
+        </td>
+    </tr>
+    @foreach (var kvp in Model)
+    {
+        <tr>
+            <td class="content-block" style="font-family: sans-serif; font-weight:bold; vertical-align: middle; padding: 5px; font-size: 16px; width:1%; @(odd ? "background:#e3e3e3;":"background:#f3f3f3;")">
+                @kvp.Key
+            </td>
+            <td class="content-block" style="font-family: sans-serif; vertical-align: middle; padding: 5px; font-size: 16px; @(odd ? "background:#e3e3e3;":"background:#f3f3f3;")">
+                @kvp.Value
+            </td>
+        </tr>
+        odd = !odd;
+    }
+</table>
 ```
 
 #### _EzMailLayout.cshtml
