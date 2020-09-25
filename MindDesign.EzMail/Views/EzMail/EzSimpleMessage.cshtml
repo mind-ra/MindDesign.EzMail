@@ -1,0 +1,24 @@
+﻿@model IDictionary<string, string>
+@{
+    var odd = true;
+}
+
+<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;">
+    <tr>
+        <td colspan="2" class="content-block" style="font-family: sans-serif; vertical-align: middle; padding: 5px; font-size: 24px; text-align:center">
+            Messaggio semplice
+        </td>
+    </tr>
+    @foreach (var kvp in Model)
+    {
+        <tr>
+            <td class="content-block" style="font-family: sans-serif; font-weight:bold; vertical-align: middle; padding: 5px; font-size: 16px; width:1%; @(odd ? "background:#e3e3e3;":"background:#f3f3f3;")">
+                @kvp.Key
+            </td>
+            <td class="content-block" style="font-family: sans-serif; vertical-align: middle; padding: 5px; font-size: 16px; @(odd ? "background:#e3e3e3;":"background:#f3f3f3;")">
+                @kvp.Value
+            </td>
+        </tr>
+        odd = !odd;
+    }
+</table>
