@@ -109,6 +109,7 @@ The views provided are:
 #### EzSimpleMessage.cshtml
 
 ```html
+@model IDictionary<string, string>
 @{
     var odd = true;
 }
