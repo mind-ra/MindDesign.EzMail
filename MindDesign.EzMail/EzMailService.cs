@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
+using MindDesign.EzMail.RazorTemplating;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace MindDesign.EzMail
 {
     public class EzMailService : IEzMailService
     {
-        private readonly EzMailConfig ezMailConfig;
-
         public IRazorViewToStringRenderer Renderer { get; private set; }
+
+        private readonly EzMailConfig ezMailConfig;
 
         public EzMailService(IRazorViewToStringRenderer renderer, IConfiguration configuration)
         {
@@ -19,7 +20,7 @@ namespace MindDesign.EzMail
                 .GetSection(EzMailConfig.EzMail)
                 .Get<EzMailConfig>();
 
-            this.Renderer = renderer;
+            Renderer = renderer;
         }
 
         public void SendMail(string subject, string body, string fromAddress, IList<string> toAddresses, IList<string> replyAddresses = null, IList<string> ccAddresses = null, IList<string> bccAddresses = null, IList<string> attachments = null)
@@ -68,7 +69,7 @@ namespace MindDesign.EzMail
             {
                 builder.Attachments.Add(attachment);
             }
-            
+
             if (ezMailConfig.DebugData.Active)
             {
                 message.Subject = $"[DEBUG] - {subject}";
@@ -109,13 +110,13 @@ namespace MindDesign.EzMail
         IRazorViewToStringRenderer Renderer { get; }
 
         Task SendMailAsync(
-            string subject, string body,
-            string fromAddress,
-            IList<string> toAddresses,
-            IList<string> replyAddresses = null,
-            IList<string> ccAddresses = null,
-            IList<string> bccAddresses = null,
-            IList<string> attachments = null);
+             string subject, string body,
+             string fromAddress,
+             IList<string> toAddresses,
+             IList<string> replyAddresses = null,
+             IList<string> ccAddresses = null,
+             IList<string> bccAddresses = null,
+             IList<string> attachments = null);
 
         void SendMail(
             string subject, string body,

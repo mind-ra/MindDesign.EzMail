@@ -7,7 +7,12 @@
     <Company>Angelo Rotta</Company>
     <Description>EzMail is a simple Razor Class Library designed to simplify the sending of email in .Net Core 3.0 apps.</Description>
     <PackageTags>mail, simple, razor class library, razor, template, mailkit, smtp</PackageTags>
-    <Version>1.0.0</Version>
+    <Version>2.0.0</Version>
+    <Product>MindDesign.EzMail</Product>
+    <PackageId>MindDesign.EzMail</PackageId>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Update Template Engine using https://github.com/soundaranbu/RazorTemplating/</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +21,7 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="2.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.3" />
   </ItemGroup>
 
 
