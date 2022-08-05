@@ -3,11 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+		<Nullable>enable</Nullable>
     <Authors>Angelo Rotta</Authors>
     <Company>Angelo Rotta</Company>
     <Description>EzMail is a simple Razor Class Library designed to simplify the sending of email in .Net Core 3.1 apps.</Description>
     <PackageTags>mail, simple, razor class library, razor, template, mailkit, smtp</PackageTags>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Product>MindDesign.EzMail</Product>
     <PackageId>MindDesign.EzMail</PackageId>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>

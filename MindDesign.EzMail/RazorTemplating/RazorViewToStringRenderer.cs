@@ -107,7 +107,7 @@ namespace MindDesign.EzMail.RazorTemplating
 
     internal class CustomRouter : IRouter
     {
-        public VirtualPathData GetVirtualPath(VirtualPathContext context)
+        public VirtualPathData? GetVirtualPath(VirtualPathContext context)
         {
             return null;
         }

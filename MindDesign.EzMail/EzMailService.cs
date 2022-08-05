@@ -23,7 +23,7 @@ namespace MindDesign.EzMail
             Renderer = renderer;
         }
 
-        public void SendMail(string subject, string body, string fromAddress, IList<string> toAddresses, IList<string> replyAddresses = null, IList<string> ccAddresses = null, IList<string> bccAddresses = null, IList<string> attachments = null)
+        public void SendMail(string subject, string body, string fromAddress, IList<string> toAddresses, IList<string>? replyAddresses = null, IList<string>? ccAddresses = null, IList<string>? bccAddresses = null, IList<string>? attachments = null)
         {
             Task.Run(async () =>
             {
@@ -33,7 +33,7 @@ namespace MindDesign.EzMail
                 .GetResult();
         }
 
-        public async Task SendMailAsync(string subject, string body, string fromAddress, IList<string> toAddresses, IList<string> replyAddresses = null, IList<string> ccAddresses = null, IList<string> bccAddresses = null, IList<string> attachments = null)
+        public async Task SendMailAsync(string subject, string body, string fromAddress, IList<string> toAddresses, IList<string>? replyAddresses = null, IList<string>? ccAddresses = null, IList<string>? bccAddresses = null, IList<string>? attachments = null)
         {
             var message = new MimeMessage();
             message.Subject = subject;
@@ -113,18 +113,18 @@ namespace MindDesign.EzMail
              string subject, string body,
              string fromAddress,
              IList<string> toAddresses,
-             IList<string> replyAddresses = null,
-             IList<string> ccAddresses = null,
-             IList<string> bccAddresses = null,
-             IList<string> attachments = null);
+             IList<string>? replyAddresses = null,
+             IList<string>? ccAddresses = null,
+             IList<string>? bccAddresses = null,
+             IList<string>? attachments = null);
 
         void SendMail(
             string subject, string body,
             string fromAddress,
             IList<string> toAddresses,
-            IList<string> replyAddresses = null,
-            IList<string> ccAddresses = null,
-            IList<string> bccAddresses = null,
-            IList<string> attachments = null);
+            IList<string>? replyAddresses = null,
+            IList<string>? ccAddresses = null,
+            IList<string>? bccAddresses = null,
+            IList<string>? attachments = null);
     }
 }
