@@ -12,7 +12,7 @@
 Install-Package MindDesign.EzMail
 ```
 
-Minimum Requirements: **.NET Core 3.0**.
+Minimum Requirements: **.NET Core 3.1**.
 
 ---
 
